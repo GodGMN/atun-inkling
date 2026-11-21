@@ -1,0 +1,8 @@
+project = "atun-inkling"
+domain = "atun-inkling.gimeno.dev"
+
+[apps.app]
+dockerfile = "Dockerfile"
+port = 8080
+health = "/"
+watch = ["index.html", "Dockerfile", ".dockerignore"]
