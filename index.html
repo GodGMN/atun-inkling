@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOCADILLO COJONUDAS — Atún de verdad</title>
+<meta name="description" content="Bocadillos de atún con el carácter que mereces. Fresco, jugoso y visualmente imposible de ignorar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Archivo:wght@400;600;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14100c;
+  --paper:#fdf6ec;
+  --coral:#ff4d2e;
+  --gold:#ffb400;
+  --lime:#c6f24e;
+  --teal:#12d6b6;
+  --violet:#7c3aed;
+  --pink:#ff5fa2;
+  --shadow-hard: 8px 8px 0 var(--ink);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Archivo',sans-serif;
+  overflow-x:hidden;
+}
+::selection{background:var(--coral);color:var(--paper)}
+
+/* ---------- noise ---------- */
+.grain{position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px clamp(16px,4vw,48px);
+  background:rgba(253,246,236,.85);
+  backdrop-filter:blur(12px);
+  border-bottom:3px solid var(--ink);
+}
+.logo{font-family:'Archivo Black';font-size:1.15rem;letter-spacing:-.02em;display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo-dot{width:34px;height:34px;border-radius:10px;background:var(--coral);border:3px solid var(--ink);display:grid;place-items:center;transform:rotate(-8deg);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.logo:hover .logo-dot{transform:rotate(10deg) scale(1.1)}
+.nav-cta{background:var(--ink);color:var(--paper);padding:10px 20px;border-radius:100px;font-weight:800;font-size:.85rem;text-decoration:none;letter-spacing:.02em;border:3px solid var(--ink);transition:all .2s;box-shadow:0 0 0 rgba(0,0,0,0)}
+.nav-cta:hover{background:var(--coral);transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:620px;
+  display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:clamp(20px,4vw,60px);
+  padding:110px clamp(20px,5vw,72px) 70px;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(255,180,0,.45), transparent 45%),
+    radial-gradient(circle at 10% 80%, rgba(18,214,182,.35), transparent 45%),
+    var(--paper);
+  overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(20,16,12,.06) 1px, transparent 1px),linear-gradient(90deg, rgba(20,16,12,.06) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse at 50% 40%, black 30%, transparent 75%);
+}
+.hero-copy{position:relative;z-index:2}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--ink);color:var(--lime);
+  font-weight:800;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;
+  padding:8px 18px;border-radius:100px;margin-bottom:26px;
+  transform:rotate(-2deg);
+}
+.eyebrow .pulse{width:9px;height:9px;border-radius:50%;background:var(--lime);animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+@keyframes popIn{from{opacity:0;transform:rotate(-2deg) scale(.6)}to{opacity:1;transform:rotate(-2deg) scale(1)}}
+h1{
+  font-family:'Fraunces',serif;font-weight:900;
+  font-size:clamp(3.4rem,9.5vw,7.6rem);line-height:.88;letter-spacing:-.035em;
+}
+h1 .stroke{
+  color:transparent;-webkit-text-stroke:3px var(--ink);
+  display:block;
+}
+h1 .fill-coral{color:var(--coral);display:block}
+h1 .fill-teal{color:var(--teal);display:block}
+h1 em{font-style:italic;font-weight:400;color:var(--ink)}
+.hero-sub{
+  margin-top:26px;font-size:clamp(1rem,1.6vw,1.25rem);line-height:1.55;max-width:46ch;color:#3d3229;
+  font-weight:600;
+}
+.hero-actions{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'Archivo Black';font-size:1rem;letter-spacing:.02em;
+  padding:18px 30px;border-radius:18px;border:3px solid var(--ink);cursor:pointer;text-decoration:none;
+  transition:transform .18s, box-shadow .18s;
+  box-shadow:6px 6px 0 var(--ink);
+}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn-coral{background:var(--coral);color:var(--paper)}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.hero-stats{display:flex;gap:clamp(18px,3vw,40px);margin-top:42px;flex-wrap:wrap}
+.stat .num{font-family:'Archivo Black';font-size:clamp(1.6rem,3vw,2.3rem);line-height:1}
+.stat .lbl{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:#6b5d4f;margin-top:5px}
+@keyframes riseIn{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:translateY(0)}}
+
+/* sandwich illustration */
+.hero-art{position:relative;z-index:2;display:grid;place-items:center}
+@keyframes floatIn{from{opacity:0;transform:scale(.7) rotate(-6deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+.sandwich-wrap{position:relative;width:min(100%,480px);aspect-ratio:460/400;transition:transform .25s ease-out}
+.sandwich-wrap>svg{animation:bob 4.5s ease-in-out infinite;display:block}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-22px) rotate(2deg)}}
+.rot-badge{
+  position:absolute;top:-46px;right:-30px;width:132px;height:132px;z-index:3;
+  animation:spin 12s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sticker{
+  position:absolute;z-index:3;background:var(--lime);border:3px solid var(--ink);border-radius:12px;
+  font-family:'Archivo Black';font-size:.78rem;padding:8px 14px;box-shadow:4px 4px 0 var(--ink);
+}
+.sticker.s1{top:8%;left:-8%;transform:rotate(-10deg);animation:stickerSway 3.4s ease-in-out infinite}
+.sticker.s2{bottom:12%;right:-6%;background:var(--gold);transform:rotate(6deg);animation:stickerSway 3.9s ease-in-out infinite reverse}
+@keyframes stickerSway{0%,100%{margin-top:0}50%{margin-top:-12px}}
+.shadow-blob{position:absolute;bottom:-6%;left:12%;right:12%;height:38px;background:rgba(20,16,12,.22);border-radius:50%;filter:blur(14px);z-index:0;animation:blob 4.5s ease-in-out infinite}
+@keyframes blob{0%,100%{transform:scaleX(1);opacity:.5}50%{transform:scaleX(.8);opacity:.3}}
+
+/* ---------- marquee ---------- */
+.marquee{background:var(--ink);color:var(--gold);overflow:hidden;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:14px 0;transform:rotate(-1.2deg) scale(1.03);position:relative;z-index:5}
+.marquee-track{display:flex;gap:44px;width:max-content;animation:marquee 22s linear infinite}
+.marquee-track span{font-family:'Archivo Black';font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:44px}
+.marquee-track i{font-style:normal;color:var(--teal)}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+section{padding:clamp(60px,9vw,110px) clamp(20px,5vw,72px);position:relative}
+.section-tag{font-family:'Archivo Black';font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--coral);display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.section-tag::before{content:"";width:44px;height:4px;background:var(--coral)}
+h2{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(2.1rem,5vw,3.7rem);line-height:.95;letter-spacing:-.03em;max-width:16ch}
+.section-sub{margin-top:16px;max-width:58ch;color:#4a3f34;font-weight:600;line-height:1.6;font-size:1.05rem}
+
+/* flavors */
+.flavors{background:var(--ink);color:var(--paper)}
+.flavors .section-tag{color:var(--lime)}
+.flavors .section-tag::before{background:var(--lime)}
+.flavors .section-sub{color:#c9bfb0}
+.flavor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.flavor-card{
+  background:#221b14;border:3px solid #3a2f24;border-radius:24px;padding:30px 26px;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),border-color .3s, box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+.flavor-card:hover{transform:translateY(-10px) rotate(-1deg);border-color:var(--gold);box-shadow:0 22px 44px rgba(0,0,0,.45)}
+.flavor-emoji{width:74px;height:74px;border-radius:20px;display:grid;place-items:center;margin-bottom:20px;border:3px solid var(--ink)}
+.flavor-card h3{font-family:'Archivo Black';font-size:1.25rem;line-height:1.15;margin-bottom:10px}
+.flavor-card p{color:#c9bfb0;line-height:1.55;font-size:.92rem;font-weight:600}
+.flavor-price{margin-top:18px;display:flex;justify-content:space-between;align-items:center;border-top:2px dashed #4a3f34;padding-top:16px}
+.flavor-price .p{font-family:'Archivo Black';font-size:1.4rem;color:var(--lime)}
+.flavor-price .a{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.flavor-card .corner-dot{position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;opacity:.18}
+
+/* pack 34 */
+.pack{background:var(--violet);color:#fff;overflow:hidden;position:relative}
+.pack::before{content:"34";position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-family:'Archivo Black';font-size:clamp(16rem,38vw,30rem);line-height:.8;color:rgba(255,255,255,.08);pointer-events:none;letter-spacing:-.05em}
+.pack-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);align-items:center}
+.pack h2{color:#fff}
+.pack h2 .stroke{color:transparent;-webkit-text-stroke:3px #fff}
+.pack-sub{color:#e4d9ff;margin-top:18px;font-weight:600;line-height:1.65;max-width:48ch}
+.qty-box{background:#ffffff12;border:3px solid #ffffff3d;border-radius:28px;padding:clamp(22px,3vw,34px);backdrop-filter:blur(6px)}
+.qty-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
+.qty-title b{font-family:'Archivo Black';font-size:.8rem;letter-spacing:.18em;text-transform:uppercase}
+.qty-title span{font-family:'Archivo Black';font-size:1rem;color:var(--lime)}
+.stepper{display:flex;align-items:center;gap:18px;justify-content:center;margin:8px 0 6px}
+.stepper button{
+  width:60px;height:60px;border-radius:18px;border:3px solid #fff;background:transparent;color:#fff;
+  font-size:1.7rem;font-weight:900;cursor:pointer;transition:all .15s;line-height:1;
+}
+.stepper button:hover{background:#fff;color:var(--violet)}
+.stepper button:active{transform:scale(.9)}
+.qty-num{font-family:'Archivo Black';font-size:clamp(3rem,6vw,4.4rem);min-width:2.4ch;text-align:center;color:#fff;font-variant-numeric:tabular-nums;transition:transform .2s}
+.qty-num.bump{transform:scale(1.22) rotate(-3deg);color:var(--lime)}
+.unit-price{text-align:center;color:#e4d9ff;font-weight:700;font-size:.9rem;margin-bottom:20px}
+.total-row{display:flex;justify-content:space-between;align-items:center;background:#0f0a1e;border-radius:18px;padding:16px 22px;margin-bottom:18px}
+.total-row .t-lbl{font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#b8a8e8}
+.total-row .t-val{font-family:'Archivo Black';font-size:1.8rem;color:var(--lime);font-variant-numeric:tabular-nums}
+.pack .btn{width:100%;justify-content:center;font-size:1.05rem}
+.pack-note{text-align:center;margin-top:14px;font-size:.78rem;color:#e4d9ff;font-weight:700;letter-spacing:.06em}
+
+/* testimonials */
+.tests{background:var(--paper)}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.test-card{background:#fff;border:3px solid var(--ink);border-radius:22px;padding:26px;box-shadow:6px 6px 0 var(--ink);transform:rotate(0);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.test-card:nth-child(1){transform:rotate(-1.6deg)}
+.test-card:nth-child(2){transform:rotate(1.2deg) translateY(10px)}
+.test-card:nth-child(3){transform:rotate(-1deg)}
+.test-card:hover{transform:rotate(0) translateY(-8px) scale(1.02)}
+.test-card .stars{color:var(--gold);font-size:1.1rem;letter-spacing:4px;margin-bottom:12px}
+.test-card p{font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;line-height:1.5;font-weight:600}
+.test-card .who{margin-top:16px;font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#6b5d4f}
+.test-card .who b{color:var(--coral)}
+
+/* footer */
+footer{background:var(--ink);color:var(--paper);text-align:center;padding:64px 20px 40px}
+footer .big{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(2rem,6vw,4rem);letter-spacing:-.03em;line-height:1}
+footer .big span{color:var(--gold)}
+footer p{color:#9a8f80;margin-top:16px;font-weight:600}
+footer .fine{margin-top:30px;font-size:.75rem;color:#6b6358;letter-spacing:.06em}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:300}
+.toast{
+  position:fixed;bottom:26px;left:50%;transform:translate(-50%,18px) scale(.9);opacity:0;pointer-events:none;z-index:400;
+  background:var(--ink);color:var(--paper);border:3px solid var(--lime);border-radius:16px;
+  padding:16px 26px;font-family:'Archivo Black';font-size:.95rem;box-shadow:8px 8px 0 rgba(0,0,0,.25);
+  transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .35s;max-width:90vw;text-align:center;
+}
+.toast.show{transform:translate(-50%,0) scale(1);opacity:1}
+
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding-top:100px;text-align:center}
+  .hero-copy{order:2}
+  .hero-art{order:1;transform:scale(.92);padding-top:34px}
+  .rot-badge{top:0;right:-6px;width:104px;height:104px}
+  h1 .stroke{-webkit-text-stroke-width:2px}
+  .flavor-grid,.test-grid{grid-template-columns:1fr}
+  .pack-inner{grid-template-columns:1fr}
+  .hero-actions,.hero-stats{justify-content:center}
+  .hero-sub{margin-left:auto;margin-right:auto}
+  .sticker.s1{left:2%}
+  .sticker.s2{right:2%}
+  .rot-badge{width:100px;height:100px;top:-36px;right:-14px}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <span class="logo-dot">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 12c4-6 11-8 18-6-2 5-8 10-15 10-2 0-3-2-3-4z" fill="#fdf6ec"/><circle cx="16.5" cy="8.5" r="1.4" fill="#14100c"/></svg>
+    </span>
+    BOCADILLO COJONUDAS
+  </a>
+  <a class="nav-cta" href="#pack">Ver el pack 34</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="pulse"></span> Atún fresco · Abierto a diario</div>
+    <h1>
+      <span class="stroke">BOCADILLO</span>
+      <span class="fill-coral">DE ATÚN</span>
+      <em>de pega.</em>
+    </h1>
+    <p class="hero-sub">Pan crujiente, atún jugoso y relleno de verdad. No es un bocadillo cualquiera: es el momento. Y el momento de comprar <b>34</b> (sí, 34).</p>
+    <div class="hero-actions">
+      <a href="#pack" class="btn btn-coral">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        Comprar 34
+      </a>
+      <a href="#sabores" class="btn btn-ink">Ver sabores</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="num">4.9/5</div><div class="lbl">Valoración</div></div>
+      <div class="stat"><div class="num">12k+</div><div class="lbl">Bocadillos vividos</div></div>
+      <div class="stat"><div class="num">0</div><div class="lbl">Bocadillos desperdiciados</div></div>
+    </div>
+  </div>
+
+  <div class="hero-art">
+    <div class="sandwich-wrap">
+      <div class="rot-badge">
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
+          <defs><path id="circ" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/></defs>
+          <circle cx="50" cy="50" r="49" fill="var(--gold)" stroke="var(--ink)" stroke-width="2.5"/>
+          <text font-family="Archivo Black" font-size="9.5" letter-spacing="2.6" fill="var(--ink)">
+            <textPath href="#circ">COJONUDAS • FRESCO • COJONUDAS • FRESCO • </textPath>
+          </text>
+          <path d="M50 32 l4.5 9.5 10.5 1.3 -7.8 7.2 2.2 10.4 -9.4 -5.2 -9.4 5.2 2.2 -10.4 -7.8 -7.2 10.5 -1.3z" fill="var(--coral)" stroke="var(--ink)" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="sticker s1">100% atún</div>
+      <div class="sticker s2">Sin postureo</div>
+      <svg viewBox="0 0 460 400" width="100%" role="img" aria-label="Bocadillo de atún dibujado a mano">
+        <!-- shadow -->
+        <ellipse cx="230" cy="352" rx="150" ry="22" fill="rgba(20,16,12,.18)"/>
+        <!-- back bread -->
+        <path d="M60 200 Q70 92 230 84 Q390 92 400 200 L400 236 Q230 268 60 236 Z" fill="#e8b25f" stroke="#14100c" stroke-width="7" stroke-linejoin="round"/>
+        <!-- filling -->
+        <g stroke="#14100c" stroke-width="5" stroke-linejoin="round">
+          <path d="M72 246 q40 -26 82 0 t82 0 t82 0 t82 0 l0 8 -328 0z" fill="#c6f24e"/>
+          <path d="M74 254 q40 20 82 4 t82 4 t82 4 t82 2 l0 10 -328 -2z" fill="#ff4d2e"/>
+        </g>
+        <!-- tuna flakes -->
+        <g fill="#12d6b6" stroke="#14100c" stroke-width="4" stroke-linejoin="round">
+          <path d="M110 226 q16 -12 34 -4 q-6 16 -22 16 q-16 0 -12 -12z"/>
+          <path d="M180 232 q15 -11 31 -3 q-5 15 -21 15 q-15 0 -10 -12z"/>
+          <path d="M252 226 q16 -12 33 -4 q-6 16 -22 15 q-15 1 -11 -11z"/>
+          <path d="M322 232 q15 -11 30 -3 q-5 15 -20 15 q-15 0 -10 -12z"/>
+        </g>
+        <!-- front bread -->
+        <path d="M52 252 Q70 344 230 356 Q390 344 408 252 Q230 286 52 252 Z" fill="#f3c87d" stroke="#14100c" stroke-width="7" stroke-linejoin="round"/>
+        <path d="M110 306 q120 34 240 0" fill="none" stroke="#d99a3f" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 16"/>
+        <!-- sesame -->
+        <g fill="#fdf6ec" stroke="#14100c" stroke-width="2.5">
+          <ellipse cx="150" cy="176" rx="7" ry="4" transform="rotate(-18 150 176)"/>
+          <ellipse cx="230" cy="158" rx="7" ry="4" transform="rotate(9 230 158)"/>
+          <ellipse cx="315" cy="178" rx="7" ry="4" transform="rotate(24 315 178)"/>
+        </g>
+        <!-- shine -->
+        <path d="M96 128 q80 -30 170 -24" fill="none" stroke="#fdf6ec" stroke-width="9" stroke-linecap="round" opacity=".65"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Atún puro <i>✦</i> Pan crujiente <i>✦</i> Con carácter <i>✦</i> Fresco cada mañana <i>✦</i> Sin postureo <i>✦</i> Bocadillo cojonudo <i>✦</i> </span>
+    <span>Atún puro <i>✦</i> Pan crujiente <i>✦</i> Con carácter <i>✦</i> Fresco cada mañana <i>✦</i> Sin postureo <i>✦</i> Bocadillo cojonudo <i>✦</i> </span>
+  </div>
+</div>
+
+<!-- SABORES -->
+<section class="flavors" id="sabores">
+  <div class="section-tag">Sabores</div>
+  <h2>Tres formas de <em style="color:var(--gold)">flipar</em> con un atún.</h2>
+  <p class="section-sub">Todo lo que entra en nuestra barra está pensado para que no mires el bocadillo: lo saboreadas.</p>
+  <div class="flavor-grid">
+    <article class="flavor-card">
+      <div class="corner-dot" style="background:var(--coral)"></div>
+      <div class="flavor-emoji" style="background:var(--coral)">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#14100c" stroke-width="2" stroke-linejoin="round"><path d="M4 8c3-4 9-5.5 14.5-3.5C17 12 9 15 4 8z" fill="#fdf6ec"/><circle cx="15.5" cy="8.4" r="1" fill="#14100c"/><path d="M6 15q4 3 8 0t6 0" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Atún romesco</h3>
+      <p>Atún desmenuzado con tomate asado, almendra y un toque de pimentón dulce. Corazón de mercado.</p>
+      <div class="flavor-price"><span class="p">4,50 €</span><span class="a">El legendario</span></div>
+    </article>
+    <article class="flavor-card">
+      <div class="corner-dot" style="background:var(--lime)"></div>
+      <div class="flavor-emoji" style="background:var(--lime)">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#14100c" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="13" r="7" fill="#fdf6ec"/><path d="M12 6V3M9 4h6" stroke-linecap="round"/><path d="M8.5 12.5l2.5 2.5 4.5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>Atún + aguacate</h3>
+      <p>Cremoso, fresco y con lima. El bocadillo que convence a quien dice que no le gusta el atún.</p>
+      <div class="flavor-price"><span class="p">5,25 €</span><span class="a">Cremoso</span></div>
+    </article>
+    <article class="flavor-card">
+      <div class="corner-dot" style="background:var(--gold)"></div>
+      <div class="flavor-emoji" style="background:var(--gold)">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#14100c" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2 6 6 .4 -4.8 4 1.8 6L12 16.4 6.9 19.4l1.8-6L4 9.4 10 9z" fill="#fdf6ec"/></svg>
+      </div>
+      <h3>Atún caramelizado</h3>
+      <p>Cebolla caramelizada dulce, mostaza y un grano de café de carácter. Es de los que se quedan.</p>
+      <div class="flavor-price"><span class="p">5,75 €</span><span class="a">El último grito</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- PACK 34 -->
+<section class="pack" id="pack">
+  <div class="pack-inner">
+    <div>
+      <div class="section-tag" style="color:var(--lime)">Pack estrella</div>
+      <h2>¿34? <span class="stroke">Sí.</span> Te lo mereces.</h2>
+      <p class="pack-sub">Pack diseñado para picar en grupo, celebrar o convencer a todo un trabajo. 34 bocadillos de atún, mezclando los tres sabores. El descuento no se explica solo: se siente.</p>
+    </div>
+    <div class="qty-box">
+      <div class="qty-title"><b>Tu pedido</b><span id="packBadge">Pack 34</span></div>
+      <div class="stepper">
+        <button id="minus" aria-label="Quitar uno">−</button>
+        <div class="qty-num" id="qty">34</div>
+        <button id="plus" aria-label="Añadir uno">+</button>
+      </div>
+      <div class="unit-price"><span id="unitPrice">4,80 €</span> por bocadillo · pack 34 = <s style="color:#e4d9ff">5,10 €</s> <span style="color:var(--lime)" id="packUnit">4,80 €</span></div>
+      <div class="total-row"><span class="t-lbl">Total</span><span class="t-val" id="total">163,20 €</span></div>
+      <button class="btn btn-gold" id="buyBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+        Añadir al carrito
+      </button>
+      <div class="pack-note">Envío a domicilio · Gratis desde 30 bocadillos</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="tests">
+  <div class="section-tag">Testimonios</div>
+  <h2>La gente ya sabe (o se lo contamos nosotros).</h2>
+  <div class="test-grid">
+    <article class="test-card">
+      <div class="stars">★★★★★</div>
+      <p>«Pedí 34 para una reunión de trabajo. Duran 20 minutos. El pack se acaba antes que la conversación.»</p>
+      <div class="who"><b>Marcos</b> · Dirección</div>
+    </article>
+    <article class="test-card">
+      <div class="stars">★★★★★</div>
+      <p>«El primero que probé lo fui a por más. Ahora el de la oficina es siempre el pack 34.»</p>
+      <div class="who"><b>Lucía</b> · Marketing</div>
+    </article>
+    <article class="test-card">
+      <div class="stars">★★★★★</div>
+      <p>«El sabor de la foto no existe… pero el bocadillo sí. Cojonudo de verdad.»</p>
+      <div class="who"><b>Andrés</b> · Logística</div>
+    </article>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="big">Listo para no pensar otra cosa <span>en 34 bocadillos</span>?</div>
+  <p>Bocadillo Cojonudas · Calle del Atún 34, Madrid</p>
+  <div class="fine">© 2026 Bocadillo Cojonudas — Hecho con atún de verdad y cero postureo.</div>
+</footer>
+
+<canvas id="confetti"></canvas>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- quantity / total ---------- */
+const BASE=4.80, packPrice=4.80, full=5.10;
+let qty=34;
+const qtyEl=document.getElementById('qty'), totalEl=document.getElementById('total'), badge=document.getElementById('packBadge');
+function fmt(n){return n.toLocaleString('es-ES',{style:'currency',currency:'EUR'});}
+function render(){
+  qtyEl.textContent=qty;
+  const discounted = qty>=30;
+  const unit = discounted?packPrice:full;
+  document.getElementById('unitPrice').textContent = fmt(unit);
+  document.getElementById('packUnit').textContent = fmt(packPrice);
+  badge.textContent = qty>=30 ? 'Pack '+qty+' ✓' : 'Pack 34';
+  totalEl.textContent = fmt(qty*unit);
+  qtyEl.classList.remove('bump'); void qtyEl.offsetWidth; qtyEl.classList.add('bump');
+}
+document.getElementById('minus').addEventListener('click',()=>{if(qty>1){qty--;render();}});
+document.getElementById('plus').addEventListener('click',()=>{if(qty<500){qty++;render();}});
+render();
+
+/* ---------- confetti ---------- */
+const canvas=document.getElementById('confetti'), ctx=canvas.getContext('2d');
+let parts=[], raf=null;
+function sizeCanvas(){canvas.width=innerWidth;canvas.height=innerHeight;}
+sizeCanvas(); addEventListener('resize',sizeCanvas);
+const COLORS=['#ff4d2e','#ffb400','#c6f24e','#12d6b6','#7c3aed','#ff5fa2'];
+function burst(n){
+  for(let i=0;i<n;i++){
+    parts.push({x:innerWidth/2+(Math.random()-.5)*300, y:innerHeight*0.35,
+      vx:(Math.random()-.5)*16, vy:-Math.random()*15-6, g:.45+Math.random()*.3,
+      s:5+Math.random()*9, r:Math.random()*Math.PI, vr:(Math.random()-.5)*.3,
+      c:COLORS[Math.floor(Math.random()*COLORS.length)], shape:Math.random()>.5?'rect':'circle', life:1});
+  }
+  if(!raf) tick();
+}
+function tick(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  parts=parts.filter(p=>p.life>0);
+  for(const p of parts){
+    p.vy+=p.g; p.x+=p.vx; p.y+=p.vy; p.r+=p.vr; p.life-=.008;
+    ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.r); ctx.globalAlpha=Math.max(p.life,0); ctx.fillStyle=p.c;
+    if(p.shape==='rect') ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);
+    else { ctx.beginPath(); ctx.arc(0,0,p.s/2,0,Math.PI*2); ctx.fill(); }
+    ctx.restore();
+  }
+  if(parts.length){raf=requestAnimationFrame(tick);} else {raf=null; ctx.clearRect(0,0,canvas.width,canvas.height);}
+}
+
+/* ---------- buy ---------- */
+const toast=document.getElementById('toast');
+let toastTimer=null;
+function showToast(msg){
+  toast.textContent=msg; toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>toast.classList.remove('show'),3800);
+}
+document.getElementById('buyBtn').addEventListener('click',()=>{
+  burst(160);
+  showToast('¡'+qty+' bocadillos de atún en el carrito!');
+});
+
+/* ---------- hero tilt ---------- */
+const wrap=document.querySelector('.sandwich-wrap');
+const art=document.querySelector('.hero-art');
+art.addEventListener('mousemove',e=>{
+  const r=art.getBoundingClientRect();
+  const dx=(e.clientX-r.left-r.width/2)/r.width, dy=(e.clientY-r.top-r.height/2)/r.height;
+  wrap.style.transform=`translate(${dx*18}px,${dy*14}px) rotate(${dx*6}deg)`;
+});
+art.addEventListener('mouseleave',()=>{wrap.style.transform='';});
+</script>
+</body>
+</html>
